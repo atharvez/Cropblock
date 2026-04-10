@@ -14,7 +14,6 @@ const YieldSubmission = () => {
   const [error, setError] = useState(null);
 
   const [farmers, setFarmers] = useState([]);
-  const [loadingFarmers, setLoadingFarmers] = useState(true);
 
   React.useEffect(() => {
     const fetchFarmers = async () => {
@@ -23,8 +22,6 @@ const YieldSubmission = () => {
         setFarmers(response.data);
       } catch (err) {
         console.error('Error fetching farmers:', err);
-      } finally {
-        setLoadingFarmers(false);
       }
     };
     fetchFarmers();
