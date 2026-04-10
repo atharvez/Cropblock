@@ -17,7 +17,11 @@ const yieldRoutes = require('./routes/yieldRoutes');
 const sellRoutes = require('./routes/sellRoutes'); // Add this line for the new sell routes
 
 // Middleware
-app.use(cors()); // Enable CORS for all routes
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+})); // Enable CORS for all routes
 app.use(bodyParser.json()); // Parse JSON request bodies
 
 // Define Routes
