@@ -10,6 +10,7 @@ const VendorsPage = () => {
           <div className="hidden md:flex items-center gap-8 font-['Manrope'] tracking-wide font-medium">
             <Link className="text-[#002d1c]/60 dark:text-[#fbf9f6]/60 hover:text-[#002d1c] dark:hover:text-[#fbf9f6] transition-colors" to="/">Home</Link>
             <Link className="text-[#002d1c]/60 dark:text-[#fbf9f6]/60 hover:text-[#002d1c] dark:hover:text-[#fbf9f6] transition-colors" to="/farmers">Farmers</Link>
+            <Link className="text-[#002d1c]/60 dark:text-[#fbf9f6]/60 hover:text-[#002d1c] dark:hover:text-[#fbf9f6] transition-colors" to="/dashboard">Dashboard</Link>
             <Link className="text-[#002d1c]/60 dark:text-[#fbf9f6]/60 hover:text-[#002d1c] dark:hover:text-[#fbf9f6] transition-colors" to="/yields/submit">Yields</Link>
             <Link className="text-[#002d1c]/60 dark:text-[#fbf9f6]/60 hover:text-[#002d1c] dark:hover:text-[#fbf9f6] transition-colors" to="/sell">Sell</Link>
             <Link className="text-[#002d1c] dark:text-white border-b-2 border-[#002d1c] dark:border-[#fbf9f6] pb-1" to="/vendors">Vendors</Link>

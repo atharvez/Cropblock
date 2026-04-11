@@ -9,6 +9,7 @@ import SellPage from './pages/SellPage';
 import VendorsPage from "./pages/VendorsPage";
 import AdminProfile from "./pages/AdminProfile";
 import FarmerProfile from "./pages/FarmerProfile";
+import DashboardPage from './pages/DashboardPage';
 
 // Component imports
 import FarmersList from './components/FarmerList';
@@ -34,6 +35,7 @@ function App() {
       <Route path="/vendors" element={<VendorsPage />} />
       <Route path="/admin" element={<AdminProfile />} />
       <Route path="/profile/:id" element={<FarmerProfile />} />
+      <Route path="/dashboard" element={<DashboardPage />} />
     </Routes>
   );
 }

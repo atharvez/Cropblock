@@ -88,6 +88,7 @@ const SellPage = () => {
           <div className="hidden md:flex items-center space-x-8 font-['Manrope'] tracking-wide font-medium">
             <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/">Home</Link>
             <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/farmers">Farmers</Link>
+            <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/dashboard">Dashboard</Link>
             <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/yields/submit">Yields</Link>
             <Link className="text-[#002d1c] border-b-2 border-[#002d1c] pb-1" to="/sell">Sell</Link>
             <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/vendors">Vendors</Link>

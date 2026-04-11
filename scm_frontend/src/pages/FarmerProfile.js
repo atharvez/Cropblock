@@ -49,6 +49,7 @@ const FarmerProfile = () => {
           <div className="hidden md:flex items-center gap-6 font-headline tracking-wide font-medium">
             <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/">Home</Link>
             <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/farmers">Farmers</Link>
+            <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/dashboard">Dashboard</Link>
             <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/yields/submit">Yields</Link>
             <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/sell">Sell</Link>
             <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/vendors">Vendors</Link>
