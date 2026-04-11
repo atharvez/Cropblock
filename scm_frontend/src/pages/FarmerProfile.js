@@ -34,163 +34,252 @@ const FarmerProfile = () => {
   }, [id]);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(farmer.wallet);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (farmer) {
+      navigator.clipboard.writeText(farmer.wallet);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
+
+  const Navbar = () => (
+    <nav className="fixed top-0 w-full z-50 glass-header shadow-sm">
+      <div className="flex justify-between items-center h-20 px-8 max-w-[1440px] mx-auto">
+        <div className="flex items-center gap-8">
+          <span className="text-2xl font-bold tracking-tight text-[#002d1c] font-headline">Cropblock</span>
+          <div className="hidden md:flex items-center gap-6 font-headline tracking-wide font-medium">
+            <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/">Home</Link>
+            <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/farmers">Farmers</Link>
+            <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/yields/submit">Yields</Link>
+            <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/sell">Sell</Link>
+            <Link className="text-[#002d1c]/60 hover:text-[#002d1c] transition-colors" to="/vendors">Vendors</Link>
+          </div>
+        </div>
+        <div className="flex items-center gap-4">
+          <button className="p-2 text-[#002d1c] hover:bg-[#fbf9f6] transition-all active:scale-95">
+            <span className="material-symbols-outlined" data-icon="notifications">notifications</span>
+          </button>
+          <div className="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/20">
+            <img alt="User profile avatar" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoV-VB8c6ZbH5l5qErlfY2of0QErowVRyb5bSD0luYsOTI52CTeVKsRudA2C1XXlukq3Qa2CUp4h3f2ffNHIT89OCLgT7JNhzaAJFsBgyi20BAntFxP1Bo7RG6VspbtWPhKiRW5aBnzwPJ-LJZTE3UYAv9KBqa5yDvr0icujfIYBs6XjRJOY5aQjhJxqyclbWpUDmpBCNnaYpMy4H4N5xkMhkpxj_44dKxR2voMqXb0QjAoSkMiUterzWu7jIhnzgPwZx8ZjnGmi6g" />
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+
+  const Footer = () => (
+    <footer className="w-full border-t border-[#c1c8c2]/20 bg-[#fbf9f6]">
+      <div className="flex flex-col md:flex-row justify-between items-center py-12 px-8 max-w-[1440px] mx-auto space-y-4 md:space-y-0">
+        <div className="flex items-center gap-6">
+          <span className="font-headline font-bold text-[#002d1c]">Cropblock</span>
+          <span className="font-label text-sm uppercase tracking-wider text-[#002d1c]/50">© 2024 Cropblock Ledger. All rights reserved.</span>
+        </div>
+      </div>
+    </footer>
+  );
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f0f7f0' }}>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ width: 48, height: 48, border: '3px solid #1a6b3c', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto 16px' }} />
-          <p style={{ color: '#1a6b3c', fontFamily: 'system-ui', fontWeight: 600 }}>Loading profile...</p>
-        </div>
-        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      <div className="bg-background text-on-surface font-body min-h-screen selection:bg-primary-fixed selection:text-on-primary-fixed flex flex-col">
+        <Navbar />
+        <main className="flex-grow flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+        </main>
+        <Footer />
       </div>
     );
   }
 
   if (error || !farmer) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f0f7f0', padding: 20 }}>
-        <div style={{ background: '#fff', borderRadius: 16, padding: 32, textAlign: 'center', maxWidth: 360, width: '100%', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
-          <div style={{ fontSize: 48, marginBottom: 16 }}>⚠️</div>
-          <h2 style={{ color: '#1a1a1a', fontFamily: 'system-ui', fontWeight: 700, marginBottom: 8 }}>Not Found</h2>
-          <p style={{ color: '#666', fontFamily: 'system-ui', marginBottom: 24 }}>{error}</p>
-          <Link to="/farmers" style={{ background: '#1a6b3c', color: '#fff', padding: '12px 24px', borderRadius: 10, fontFamily: 'system-ui', fontWeight: 600, textDecoration: 'none', display: 'inline-block' }}>
-            ← Back to Farmers
-          </Link>
-        </div>
+      <div className="bg-background text-on-surface font-body min-h-screen selection:bg-primary-fixed selection:text-on-primary-fixed flex flex-col">
+        <Navbar />
+        <main className="flex-grow flex items-center justify-center pt-32 pb-20 px-8">
+          <div className="p-8 bg-surface-container-low rounded-2xl border border-outline-variant/20 text-center max-w-md w-full">
+            <span className="material-symbols-outlined text-5xl text-error mb-4">error</span>
+            <h2 className="font-headline text-2xl font-bold text-primary mb-2">Not Found</h2>
+            <p className="text-on-surface-variant mb-6">{error}</p>
+            <Link to="/farmers" className="inline-flex h-12 px-6 bg-primary text-on-primary rounded-lg font-bold hover:bg-primary-container transition-all active:scale-95 items-center justify-center">
+              Back to Farmers
+            </Link>
+          </div>
+        </main>
+        <Footer />
       </div>
     );
   }
 
   const maskedAadhaar = farmer.aadhaar ? `XXXX-XXXX-${farmer.aadhaar.slice(-4)}` : 'N/A';
   const totalWeight = stocks.reduce((sum, s) => sum + parseFloat(s.weight || 0), 0);
-  const initials = farmer.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  const initials = farmer.name ? farmer.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) : 'FA';
 
   const categoryColors = {
-    'Grains': '#f59e0b',
-    'Fruits': '#f97316',
-    'Vegetables': '#22c55e',
-    'Cash Crops': '#8b5cf6',
+    'Grains': 'bg-amber-100 text-amber-700 border-amber-200',
+    'Fruits': 'bg-orange-100 text-orange-700 border-orange-200',
+    'Vegetables': 'bg-green-100 text-green-700 border-green-200',
+    'Cash Crops': 'bg-purple-100 text-purple-700 border-purple-200',
   };
-  const categoryColor = categoryColors[farmer.crop_type] || '#1a6b3c';
+  const badgeClass = categoryColors[farmer.crop_type] || 'bg-primary-container text-on-primary-container border-primary/20';
 
   return (
-    <div style={{ background: '#f0f7f0', minHeight: '100vh', fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <div className="bg-background text-on-surface font-body min-h-screen selection:bg-primary-fixed selection:text-on-primary-fixed">
+      <Navbar />
 
-      {/* Top Bar */}
-      <div style={{ background: '#1a6b3c', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 50 }}>
-        <Link to="/" style={{ color: '#fff', textDecoration: 'none', fontWeight: 800, fontSize: 18, letterSpacing: '-0.5px' }}>
-          🌿 Cropblock
-        </Link>
-        <Link to="/farmers" style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none', fontSize: 14, fontWeight: 500 }}>
-          ← Directory
-        </Link>
-      </div>
+      <main className="pt-32 pb-20 px-6 max-w-[1200px] mx-auto min-h-screen">
+        {/* Back Link for Mobile */}
+        <div className="mb-6 md:hidden">
+          <Link to="/farmers" className="text-primary font-bold flex items-center gap-1 text-sm">
+            <span className="material-symbols-outlined text-sm">arrow_back</span> Directory
+          </Link>
+        </div>
 
-      <div style={{ maxWidth: 480, margin: '0 auto', padding: '20px 16px 40px' }}>
-
-        {/* Hero Card */}
-        <div style={{ background: '#fff', borderRadius: 20, padding: '28px 24px', marginBottom: 16, boxShadow: '0 2px 16px rgba(0,0,0,0.06)', textAlign: 'center' }}>
-          <div style={{ width: 72, height: 72, borderRadius: '50%', background: categoryColor, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26, fontWeight: 800, margin: '0 auto 16px', boxShadow: `0 4px 16px ${categoryColor}40` }}>
-            {initials}
-          </div>
-
-          <h1 style={{ fontSize: 24, fontWeight: 800, color: '#1a1a1a', margin: '0 0 4px', letterSpacing: '-0.5px' }}>
-            {farmer.name}
-          </h1>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: `${categoryColor}15`, color: categoryColor, padding: '5px 14px', borderRadius: 20, fontSize: 13, fontWeight: 600, marginBottom: 20 }}>
-            <span>●</span> {farmer.crop_type} Specialist
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, textAlign: 'left' }}>
-            <div style={{ background: '#f8faf8', borderRadius: 12, padding: '12px 14px' }}>
-              <p style={{ margin: 0, fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.8px', color: '#999', marginBottom: 4 }}>Location</p>
-              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: '#1a1a1a' }}>📍 {farmer.location || 'N/A'}</p>
-            </div>
-            <div style={{ background: '#f8faf8', borderRadius: 12, padding: '12px 14px' }}>
-              <p style={{ margin: 0, fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.8px', color: '#999', marginBottom: 4 }}>Gov. ID</p>
-              <p style={{ margin: 0, fontSize: 14, fontWeight: 600, color: '#1a1a1a' }}>🪪 {maskedAadhaar}</p>
-            </div>
-            <div style={{ background: '#f8faf8', borderRadius: 12, padding: '12px 14px' }}>
-              <p style={{ margin: 0, fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.8px', color: '#999', marginBottom: 4 }}>Crop Types</p>
-              <p style={{ margin: 0, fontSize: 14, fontWeight: 700, color: categoryColor }}>{stocks.length}</p>
-            </div>
-            <div style={{ background: '#f8faf8', borderRadius: 12, padding: '12px 14px' }}>
-              <p style={{ margin: 0, fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.8px', color: '#999', marginBottom: 4 }}>Total Stock</p>
-              <p style={{ margin: 0, fontSize: 14, fontWeight: 700, color: '#1a6b3c' }}>{totalWeight.toFixed(1)} kg</p>
-            </div>
+        <div className="flex justify-between items-end mb-10 gap-4 flex-wrap">
+          <div>
+            <h1 className="font-headline text-4xl font-extrabold text-primary tracking-tight mb-2">Public Profile</h1>
+            <p className="text-on-surface-variant max-w-2xl text-lg">Identity verified on the blockchain.</p>
           </div>
         </div>
 
-        {/* Wallet Card */}
-        <div style={{ background: '#1a6b3c', borderRadius: 20, padding: '20px 20px', marginBottom: 16, boxShadow: '0 4px 16px rgba(26,107,60,0.3)' }}>
-          <p style={{ margin: '0 0 8px', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', color: 'rgba(255,255,255,0.6)' }}>
-            🔗 Blockchain Address
-          </p>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'rgba(255,255,255,0.12)', borderRadius: 10, padding: '10px 14px' }}>
-            <p style={{ margin: 0, fontFamily: 'monospace', fontSize: 11, color: '#fff', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-              {farmer.wallet}
-            </p>
-            <button onClick={handleCopy} style={{ background: 'rgba(255,255,255,0.2)', border: 'none', color: '#fff', borderRadius: 6, padding: '6px 10px', fontSize: 12, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap', transition: 'all 0.2s' }}>
-              {copied ? '✓ Copied' : 'Copy'}
-            </button>
-          </div>
-        </div>
-
-        {/* QR Card */}
-        <div style={{ background: '#fff', borderRadius: 20, padding: '24px', marginBottom: 16, boxShadow: '0 2px 16px rgba(0,0,0,0.06)', textAlign: 'center' }}>
-          <h3 style={{ margin: '0 0 4px', fontSize: 16, fontWeight: 700, color: '#1a1a1a' }}>🔍 Scan to Verify</h3>
-          <p style={{ margin: '0 0 20px', fontSize: 13, color: '#888' }}>Share this QR to access profile on any device</p>
-          <div style={{ display: 'inline-block', background: '#fff', padding: 12, borderRadius: 16, border: '2px solid #e8f0e8', boxShadow: '0 2px 12px rgba(26,107,60,0.1)' }}>
-            <QRCodeCanvas value={window.location.href} size={180} level="H" />
-          </div>
-          <p style={{ margin: '16px 0 0', fontSize: 12, color: '#aaa', fontFamily: 'monospace', wordBreak: 'break-all' }}>
-            {window.location.href}
-          </p>
-        </div>
-
-        {/* Inventory */}
-        <div style={{ background: '#fff', borderRadius: 20, overflow: 'hidden', boxShadow: '0 2px 16px rgba(0,0,0,0.06)' }}>
-          <div style={{ padding: '20px 20px 16px', borderBottom: '1px solid #f0f0f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h3 style={{ margin: 0, fontSize: 17, fontWeight: 700, color: '#1a1a1a' }}>🌾 Live Inventory</h3>
-            <Link to="/sell" style={{ background: '#1a6b3c', color: '#fff', padding: '8px 16px', borderRadius: 10, fontSize: 13, fontWeight: 600, textDecoration: 'none' }}>
-              Trade
-            </Link>
-          </div>
-
-          {stocks.length === 0 ? (
-            <div style={{ padding: '40px 20px', textAlign: 'center' }}>
-              <div style={{ fontSize: 40, marginBottom: 12 }}>📦</div>
-              <p style={{ margin: 0, color: '#aaa', fontWeight: 500 }}>No active inventory</p>
-            </div>
-          ) : (
-            <div>
-              {stocks.map((stock, i) => (
-                <div key={stock.id} style={{ padding: '16px 20px', borderBottom: i < stocks.length - 1 ? '1px solid #f5f5f5' : 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div>
-                    <p style={{ margin: '0 0 3px', fontWeight: 700, fontSize: 16, color: '#1a1a1a' }}>{stock.crop}</p>
-                    <p style={{ margin: 0, fontSize: 12, color: '#aaa' }}>ID #{stock.id}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* LEFT COLUMN */}
+          <div className="lg:col-span-2 space-y-8">
+            
+            {/* Identity Card */}
+            <div className="bg-surface-container-lowest rounded-3xl p-8 border border-outline-variant/20 shadow-[0_8px_24px_rgba(27,28,26,0.06)] relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+              
+              <div className="flex flex-col sm:flex-row gap-8 items-center sm:items-start relative z-10">
+                <div className="w-28 h-28 shrink-0 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline font-bold text-4xl uppercase border-4 border-surface shadow-md">
+                  {initials}
+                </div>
+                
+                <div className="flex-grow text-center sm:text-left">
+                  <h2 className="font-headline text-3xl font-extrabold text-[#1a1a1a] mb-2">{farmer.name}</h2>
+                  <div className={`inline-flex items-center px-3 py-1 rounded-full border text-xs font-bold uppercase tracking-wider mb-6 ${badgeClass}`}>
+                    {farmer.crop_type} Specialist
                   </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <p style={{ margin: '0 0 3px', fontWeight: 700, fontSize: 15, color: '#1a6b3c' }}>{stock.weight} kg</p>
-                    <p style={{ margin: 0, fontSize: 12, color: '#888', fontWeight: 600 }}>₹{stock.price}/kg</p>
+                  
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+                    <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                      <p className="text-[10px] font-bold uppercase text-on-surface-variant tracking-wider mb-1">Location</p>
+                      <p className="font-semibold text-primary">{farmer.location || 'N/A'}</p>
+                    </div>
+                    <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                      <p className="text-[10px] font-bold uppercase text-on-surface-variant tracking-wider mb-1">Gov. ID</p>
+                      <p className="font-semibold text-primary">{maskedAadhaar}</p>
+                    </div>
+                    <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                      <p className="text-[10px] font-bold uppercase text-on-surface-variant tracking-wider mb-1">Active Crops</p>
+                      <p className="font-semibold text-primary">{stocks.length}</p>
+                    </div>
+                    <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+                      <p className="text-[10px] font-bold uppercase text-on-surface-variant tracking-wider mb-1">Total Stock</p>
+                      <p className="font-semibold text-primary">{totalWeight.toFixed(1)} kg</p>
+                    </div>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
-          )}
-        </div>
 
-        <p style={{ textAlign: 'center', margin: '24px 0 0', fontSize: 12, color: '#bbb', fontWeight: 500 }}>
-          © 2024 Cropblock Ledger • Verified Identity
-        </p>
-      </div>
+            {/* Live Inventory */}
+            <div className="bg-surface-container-lowest rounded-3xl p-8 border border-outline-variant/20 shadow-[0_8px_24px_rgba(27,28,26,0.06)]">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="font-headline text-2xl font-bold text-primary flex items-center gap-2">
+                  <span className="material-symbols-outlined text-secondary">inventory_2</span> Live Inventory
+                </h3>
+                <Link to="/sell" className="text-secondary font-bold text-sm hover:underline flex items-center gap-1">
+                  Trade active stocks <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </Link>
+              </div>
+
+              {stocks.length === 0 ? (
+                <div className="py-12 border-2 border-dashed border-outline-variant/30 rounded-2xl flex flex-col items-center justify-center bg-surface-container-low">
+                  <span className="material-symbols-outlined text-4xl text-outline mb-2">inbox</span>
+                  <p className="text-on-surface-variant font-medium">No active inventory currently listed.</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {stocks.map((stock) => (
+                    <div key={stock.id} className="group flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 rounded-xl border border-outline-variant/20 bg-surface-container-low hover:border-primary/30 transition-colors">
+                      <div className="mb-2 sm:mb-0">
+                        <p className="font-headline font-bold text-lg text-primary">{stock.crop}</p>
+                        <p className="text-xs text-on-surface-variant font-mono">Lot ID: #{stock.id}</p>
+                      </div>
+                      <div className="flex items-center gap-6 w-full sm:w-auto justify-between sm:justify-end">
+                        <div className="text-left sm:text-right">
+                          <p className="text-[10px] font-bold uppercase text-on-surface-variant tracking-wider mb-0.5">Volume</p>
+                          <p className="font-bold text-primary">{stock.weight} kg</p>
+                        </div>
+                        <div className="text-left sm:text-right">
+                          <p className="text-[10px] font-bold uppercase text-on-surface-variant tracking-wider mb-0.5">Price</p>
+                          <p className="font-bold text-secondary">₹{stock.price}/kg</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+          </div>
+
+          {/* RIGHT COLUMN */}
+          <div className="space-y-6">
+            
+            {/* Wallet Hash */}
+            <div className="bg-primary text-on-primary rounded-3xl p-6 shadow-lg shadow-primary/20">
+              <div className="flex items-center space-x-2 mb-4">
+                <span className="material-symbols-outlined">link</span>
+                <h3 className="font-bold text-sm uppercase tracking-wider text-primary-container">Blockchain Address</h3>
+              </div>
+              <div className="bg-on-primary/10 rounded-xl p-4 flex flex-col gap-3">
+                <p className="font-mono text-sm break-all leading-relaxed">{farmer.wallet}</p>
+                <button 
+                  onClick={handleCopy} 
+                  className="bg-primary-container text-on-primary-container flex items-center justify-center gap-2 py-2 rounded-lg font-bold text-sm hover:brightness-105 active:scale-95 transition-all w-full mt-2"
+                >
+                  <span className="material-symbols-outlined text-sm">{copied ? 'check' : 'content_copy'}</span>
+                  {copied ? 'Copied to Clipboard' : 'Copy Address'}
+                </button>
+              </div>
+            </div>
+
+            {/* QR Scanner Block - Hidden on small screens, heavily stylized */}
+            <div className="hidden sm:block bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant/20 shadow-[0_8px_24px_rgba(27,28,26,0.06)] text-center relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+              
+              <div className="flex justify-center mb-6">
+                <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary">
+                  <span className="material-symbols-outlined text-2xl">qr_code_scanner</span>
+                </div>
+              </div>
+              
+              <h3 className="font-headline font-bold text-xl text-primary mb-2">Verify Identity</h3>
+              <p className="text-sm text-on-surface-variant mb-6 px-4">
+                Scan this cryptographically secure QR code with any mobile device to view this verified profile.
+              </p>
+              
+              <div className="inline-block bg-white p-4 rounded-2xl shadow-inner border border-outline-variant/30 mb-2 relative">
+                {/* Scanner decorative corners */}
+                <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary rounded-tl-lg pointer-events-none"></div>
+                <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-primary rounded-tr-lg pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-primary rounded-bl-lg pointer-events-none"></div>
+                <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary rounded-br-lg pointer-events-none"></div>
+                
+                <QRCodeCanvas value={window.location.href} size={160} level="H" fgColor="#002d1c" />
+              </div>
+              <p className="text-[10px] uppercase font-bold text-outline tracking-widest mt-4">Scan for mobile view</p>
+            </div>
+
+          </div>
+
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
 };
 
 export default FarmerProfile;
+
