@@ -1,12 +1,12 @@
-﻿# Cropblock ðŸŒ¾
+# Cropblock
 
 A smart crop management and marketplace web application.
 
-**Live Demo:** [cropblock.vercel.app](https://cropblock.vercel.app)
+**Live:** [cropblock.vercel.app](https://cropblock.vercel.app)
 
 ## Overview
 
-Cropblock connects farmers with buyers through an intuitive digital platform. It streamlines the crop lifecycle â€” from tracking to listing and selling â€” all in one place.
+Cropblock connects farmers with buyers through an intuitive digital platform. It streamlines the crop lifecycle -- from tracking to listing and selling -- all in one place.
 
 ## Tech Stack
 
@@ -19,11 +19,11 @@ Cropblock connects farmers with buyers through an intuitive digital platform. It
 
 ## Features
 
-- ðŸŒ± **Crop Listing** â€” List crops with details, quantity, and pricing
-- ðŸ“Š **Market Dashboard** â€” Real-time price trends and demand indicators
-- ðŸ¤ **Buyer-Seller Matching** â€” Connect farmers directly with buyers
-- ðŸ“ **Location-Based Discovery** â€” Find produce near you
-- ðŸ“± **Mobile-First Design** â€” Optimized for field use
+- Crop listing -- list crops with details, quantity, and pricing
+- Market dashboard -- price trends and demand indicators
+- Buyer-seller matching -- connect farmers directly with buyers
+- Location-based discovery -- find produce near you
+- Mobile-first design -- optimized for field use
 
 ## Getting Started
 
@@ -36,4 +36,4 @@ npm run dev
 
 ## License
 
-MIT Â© [Atharva Desai](https://github.com/atharvez)
+MIT (c) Atharva Desai
